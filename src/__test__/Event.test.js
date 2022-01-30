@@ -4,10 +4,10 @@ import Event from "../Event";
 import { mockData } from "../mock-data";
 
 describe("<Event /> component", () => {
-  let EventWrapper, eventData;
+  let EventWrapper, event;
   beforeAll(() => {
-    eventData = mockData[0];
-    EventWrapper = shallow(<Event eventData={eventData} />);
+    event = mockData[0];
+    EventWrapper = shallow(<Event event={event} />);
   });
 
   test("Event render", () => {
@@ -20,7 +20,7 @@ describe("<Event /> component", () => {
   });
 
   test("Event summary render with the right data", () => {
-    let eventSummary = eventData.summary;
+    let eventSummary = event.summary;
     expect(EventWrapper.find(".event__summary").at(0).text()).toBe(eventSummary);
   });
 
@@ -29,7 +29,7 @@ describe("<Event /> component", () => {
   });
 
   test("Event startTime render with the right data", () => {
-    let eventStartTime = eventData.start.dateTime;
+    let eventStartTime = event.start.dateTime;
     expect(EventWrapper.find(".event__start").at(0).text()).toBe(eventStartTime);
   });
 
@@ -38,7 +38,7 @@ describe("<Event /> component", () => {
   });
 
   test("Event timeZone render with the right data", () => {
-    let eventTimeZone = eventData.start.timeZone;
+    let eventTimeZone = event.start.timeZone;
     expect(EventWrapper.find(".event__timeZone").at(0).text()).toBe(eventTimeZone);
   });
 
@@ -107,7 +107,7 @@ describe("<Event /> component", () => {
   });
 
   test("Event endTime render with the right data", () => {
-    let eventEndTime = eventData.end.dateTime;
+    let eventEndTime = event.end.dateTime;
     expect(EventWrapper.find(".event__end").at(0).text()).toBe(eventEndTime);
   });
 
@@ -116,7 +116,7 @@ describe("<Event /> component", () => {
   });
 
   test("Event location render with the right data", () => {
-    let eventLocation = eventData.location;
+    let eventLocation = event.location;
     expect(EventWrapper.find(".event__location").at(0).text()).toBe(eventLocation);
   });
 
@@ -125,7 +125,7 @@ describe("<Event /> component", () => {
   });
 
   test("Event description render with the right data", () => {
-    let eventDescription = eventData.description;
+    let eventDescription = event.description;
     expect(EventWrapper.find(".event__description").at(0).text()).toBe(eventDescription);
   });
 
@@ -134,7 +134,7 @@ describe("<Event /> component", () => {
   });
 
   test("Event calendarLink render with the right data", () => {
-    let eventCalendarLink = eventData.htmlLink;
+    let eventCalendarLink = event.htmlLink;
     expect(EventWrapper.find(".event__calendarLink").at(0).text()).toBe(eventCalendarLink);
   });
 });

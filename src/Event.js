@@ -3,8 +3,8 @@
 import React, { Component } from "react";
 
 class Event extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     // stting the values for the default states
     this.state = {
       collapsed: true,
@@ -21,23 +21,23 @@ class Event extends Component {
   };
 
   render() {
-    const { eventData } = this.props;
+    const { event } = this.props;
     return (
       <div className="event">
         {/* the by defauld showen informaiton */}
-        <h1 className="event__summary">{eventData.summary}</h1>
-        <p className="event__start">{eventData.start.dateTime}</p>
-        <p className="event__timeZone">{eventData.start.timeZone}</p>
+        <h1 className="event__summary">{event.summary}</h1>
+        <p className="event__start">{event.start.dateTime}</p>
+        <p className="event__timeZone">{event.start.timeZone}</p>
         {/* the collapsed information */}
         {!this.state.collapsed && (
           <div className="event__moreDetails">
-            <p className="event__end">{eventData.end.dateTime}</p>
-            <p className="event__description">{eventData.description}</p>
-            <p className="event__location">{eventData.location}</p>
-            <p className="event__calendarLink">{eventData.htmlLink}</p>
+            <p className="event__end">{event.end.dateTime}</p>
+            <p className="event__description">{event.description}</p>
+            <p className="event__location">{event.location}</p>
+            <p className="event__calendarLink">{event.htmlLink}</p>
           </div>
         )}
-        <button className="event__detailsButton" onClick={() => this.eventDetails()}>
+        <button className="event__detailsButton details-btn" onClick={() => this.eventDetails()}>
           {this.state.detailsButtonText}
         </button>
       </div>
