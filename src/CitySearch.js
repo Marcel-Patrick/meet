@@ -46,7 +46,7 @@ class CitySearch extends Component {
           }}
           placeholder="Search for a city"
         />
-        <ul className="suggestions " style={this.state.showSuggestions ? {} : { display: "none" }}>
+        <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: "none" }}>
           {this.state.suggestions.map((suggestion) => (
             <li key={suggestion} onClick={() => this.handleItemClicked(suggestion)}>
               {suggestion}
