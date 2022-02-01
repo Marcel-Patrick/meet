@@ -14,15 +14,13 @@ class App extends Component {
     location: "all",
   };
 
-  updateEvents = (location) => {
+  updateEvents = (location, eventCount = this.state.numberOfEvents) => {
     this.mounted = true;
     getEvents().then((events) => {
       const locationEvents =
         location === "all" ? events : events.filter((event) => event.location === location);
       const eventNumberFilter =
-        this.state.numberOfEvents > locationEvents.length
-          ? locationEvents
-          : locationEvents.slice(0, this.state.numberOfEvents);
+        eventCount > locationEvents.length ? locationEvents : locationEvents.slice(0, eventCount);
       if (this.mounted) {
         this.setState({
           events: eventNumberFilter,
@@ -51,7 +49,7 @@ class App extends Component {
     this.setState({
       numberOfEvents: eventNumbers,
     });
-    this.updateEvents(this.state.location);
+    this.updateEvents(this.state.location, eventNumbers);
   };
 
   render() {
