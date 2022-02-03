@@ -1,6 +1,9 @@
 // src/Event.js
 
 import React, { Component } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import CardGroup from "react-bootstrap/CardGroup";
 
 class Event extends Component {
   constructor(props) {
@@ -24,22 +27,40 @@ class Event extends Component {
     const { event } = this.props;
     return (
       <div className="event">
-        {/* the by defauld showen informaiton */}
-        <h1 className="event__summary">{event.summary}</h1>
-        <p className="event__start">{event.start.dateTime}</p>
-        <p className="event__timeZone">{event.start.timeZone}</p>
-        {/* the collapsed information */}
-        {!this.state.collapsed && (
-          <div className="event__moreDetails">
-            <p className="event__end">{event.end.dateTime}</p>
-            <p className="event__description">{event.description}</p>
-            <p className="event__location">{event.location}</p>
-            <p className="event__calendarLink">{event.htmlLink}</p>
-          </div>
-        )}
-        <button className="event__detailsButton details-btn" onClick={() => this.eventDetails()}>
-          {this.state.detailsButtonText}
-        </button>
+        <CardGroup>
+          <Card>
+            <Card.Header as="h3" className="event__summary">
+              {event.summary}
+            </Card.Header>
+            <Card.Body>
+              {/* the by defauld showen informaiton */}
+              <Card.Title>Start time</Card.Title>
+              <Card.Text className="event__start">{event.start.dateTime}</Card.Text>
+              <Card.Title>Time zone</Card.Title>
+              <Card.Text className="event__timeZone">{event.start.timeZone}</Card.Text>
+              {/* the collapsed information */}
+              {!this.state.collapsed && (
+                <div className="event__moreDetails">
+                  <Card.Title>Description</Card.Title>
+                  <Card.Text className="event__description">{event.description}</Card.Text>
+                  <Card.Title>End time</Card.Title>
+                  <Card.Text className="event__end">{event.end.dateTime}</Card.Text>
+                  <Card.Title>Location</Card.Title>
+                  <Card.Text className="event__location">{event.location}</Card.Text>
+                  <Card.Title>Calendar link</Card.Title>
+                  <Card.Text className="event__calendarLink">{event.htmlLink}</Card.Text>
+                </div>
+              )}
+              <Button
+                variant="primary"
+                className="event__detailsButton details-btn"
+                onClick={() => this.eventDetails()}
+              >
+                {this.state.detailsButtonText}{" "}
+              </Button>
+            </Card.Body>
+          </Card>
+        </CardGroup>
       </div>
     );
   }

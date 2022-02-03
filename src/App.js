@@ -3,6 +3,10 @@ import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
 import CitySearch from "./CitySearch";
 import { getEvents, extractLocations } from "./api";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+
 import "./App.css";
 import "./nprogress.css";
 
@@ -53,10 +57,36 @@ class App extends Component {
   };
 
   render() {
+    const logo = require("./meetUp_logo_transparent.png"); // with require
+
     return (
       <div className="App">
-        <NumberOfEvents updateEventNumbers={this.updateEventNumbers} />
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+        <Navbar sticky="top" bg="light" expand="lg" variant="light" className="mb-3">
+          <Container>
+            <Navbar.Brand className="navbar-logo" href="/">
+              <img
+                src={logo}
+                width="80"
+                height="auto"
+                className="d-inline-block align-top"
+                alt="React Bootstrap logo"
+              />{" "}
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="ml-auto">
+                <Nav.Link>
+                  {" "}
+                  <NumberOfEvents updateEventNumbers={this.updateEventNumbers} />
+                </Nav.Link>
+                <Nav.Link>
+                  {" "}
+                  <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
         <EventList events={this.state.events} />
       </div>
     );

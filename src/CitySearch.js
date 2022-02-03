@@ -28,14 +28,20 @@ class CitySearch extends Component {
       query: suggestion,
       showSuggestions: false,
     });
-
     this.props.updateEvents(suggestion);
   };
-
   render() {
     const { query } = this.state;
+    document.addEventListener("mousedown", (event) => {
+      if (event.target.closest(".CitySearch")) return;
+      this.setState({
+        showSuggestions: false,
+        suggestions: [],
+      });
+    });
     return (
       <div className="CitySearch">
+        <label className="numberOfEvents__lable">Search for a city</label>{" "}
         <input
           type="text"
           className="city"
@@ -44,7 +50,7 @@ class CitySearch extends Component {
           onFocus={() => {
             this.setState({ showSuggestions: true });
           }}
-          placeholder="Search for a city"
+          placeholder="exp: Berlin"
         />
         <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: "none" }}>
           {this.state.suggestions.map((suggestion) => (
