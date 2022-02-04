@@ -9,6 +9,11 @@ body {
 .card {
   margin: 10px !important;
 }
+.event__summary{
+  height:100px;
+  display: flex;
+  align-items: center;
+}
 .event__detailsButton {
   background-color: #f5eedc;
   border: #c0d8c0;

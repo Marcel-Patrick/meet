@@ -52,7 +52,6 @@ class Event extends Component {
                 </div>
               )}
               <Button
-                variant="primary"
                 className="event__detailsButton details-btn"
                 onClick={() => this.eventDetails()}
               >

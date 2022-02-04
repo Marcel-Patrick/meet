@@ -30,15 +30,18 @@ class CitySearch extends Component {
     });
     this.props.updateEvents(suggestion);
   };
-  render() {
-    const { query } = this.state;
-    document.addEventListener("mousedown", (event) => {
+  componentWillMount(){
+        document.addEventListener("mousedown", (event) => {
       if (event.target.closest(".CitySearch")) return;
       this.setState({
         showSuggestions: false,
         suggestions: [],
       });
     });
+  }
+  render() {
+     const { query } = this.state;
+
     return (
       <div className="CitySearch">
         <label className="numberOfEvents__lable">Search for a city</label>{" "}
@@ -50,7 +53,7 @@ class CitySearch extends Component {
           onFocus={() => {
             this.setState({ showSuggestions: true });
           }}
-          placeholder="exp: Berlin"
+          placeholder="e.g: London"
         />
         <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: "none" }}>
           {this.state.suggestions.map((suggestion) => (
