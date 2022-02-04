@@ -30,8 +30,8 @@ class CitySearch extends Component {
     });
     this.props.updateEvents(suggestion);
   };
-  componentWillMount(){
-        document.addEventListener("mousedown", (event) => {
+  UNSAFE_componentWillMount() {
+    document.addEventListener("mousedown", (event) => {
       if (event.target.closest(".CitySearch")) return;
       this.setState({
         showSuggestions: false,
@@ -40,7 +40,7 @@ class CitySearch extends Component {
     });
   }
   render() {
-     const { query } = this.state;
+    const { query } = this.state;
 
     return (
       <div className="CitySearch">
