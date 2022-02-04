@@ -63,7 +63,7 @@ class App extends Component {
       <div className="App">
         <Navbar sticky="top" bg="light" expand="lg" variant="light" className="mb-3">
           <Container>
-            <Navbar.Brand className="navbar-logo" href="/">
+            <Navbar.Brand className="navbar-logo">
               <img
                 src={logo}
                 width="80"
