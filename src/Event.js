@@ -47,8 +47,10 @@ class Event extends Component {
                   <Card.Text className="event__end">{event.end.dateTime}</Card.Text>
                   <Card.Title>Location</Card.Title>
                   <Card.Text className="event__location">{event.location}</Card.Text>
-                  <Card.Title>Calendar link</Card.Title>
-                  <Card.Text className="event__calendarLink">{event.htmlLink}</Card.Text>
+                  <Card.Title>Calendar Link</Card.Title>
+                  <Card.Link className="event__calendarLink" href={event.htmlLink}>
+                    See details in Google Calendar
+                  </Card.Link>
                 </div>
               )}
               <Button
