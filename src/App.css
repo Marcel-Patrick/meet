@@ -1,7 +1,42 @@
 body {
   background: radial-gradient(#e5e5e5, #ffff, #e5e5e5);
 }
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #701b39;
+  border-width: 2px;
+}
+.Alert {
+  grid-area: header;
+}
+.numberOfEvents__lable,
+.CitySearch__lable {
+  grid-area: main;
+}
+.city,
+.numberOfEvents__input {
+  grid-area: footer;
+}
 
+.numberOfEvents {
+  display: grid;
+  grid-template-columns: 140px;
+  grid-template-rows: 18px;
+  grid-template-areas:
+    "header header"
+    "main ."
+    "footer footer";
+}
+.CitySearch {
+  display: grid;
+  grid-template-columns: 180px;
+  grid-template-rows: 18px;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
 .card:hover {
   box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.25) !important;
 }
@@ -64,7 +99,7 @@ body {
   z-index: 2;
   align-self: center;
   margin: 0;
-  top: 43px;
+  top: 80px;
   font-size: 14px;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
 }
@@ -96,4 +131,29 @@ body {
 ul {
   padding: 0;
   list-style: none;
+}
+@media only screen and (min-width: 992px) {
+  .container-fluid {
+    margin-left: 100px !important;
+    margin-right: 100px !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .numberOfEvents {
+    grid-template-areas:
+      "header header"
+      "main ."
+      "footer .";
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .event__summary {
+    font-size: 24px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .event__summary {
+    font-size: 28px;
+  }
 }
