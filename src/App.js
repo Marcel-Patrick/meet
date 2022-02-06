@@ -6,6 +6,7 @@ import { getEvents, extractLocations } from "./api";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+import Alert from "react-bootstrap/Alert";
 
 import "./App.css";
 import "./nprogress.css";
@@ -87,6 +88,11 @@ class App extends Component {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        {!navigator.onLine && (
+          <Alert variant="warning" style={{ textAlign: "center" }}>
+            Attention: You run this App now in offline mode! Neu Events can not be loaded.
+          </Alert>
+        )}
         <EventList events={this.state.events} />
       </div>
     );
