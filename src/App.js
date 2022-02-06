@@ -55,8 +55,17 @@ class App extends Component {
           }
         });
       }
-    } else {
-      getEvents();
+    }
+    // If offline, skip to getEvents. This function grabs from localStorage when offline.
+    else {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({
+            events: events.slice(0, this.state.numberOfEvents),
+            locations: extractLocations(events),
+          });
+        }
+      });
     }
   }
 
@@ -73,7 +82,6 @@ class App extends Component {
 
   render() {
     const logo = require("./meetUp_logo_transparent.png"); // with require
-    if (this.state.showWelcomeScreen === undefined) return <div className="App" />;
     if (this.state.showWelcomeScreen === true)
       return (
         <WelcomeScreen
