@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
 import CitySearch from "./CitySearch";
-import { getEvents, extractLocations } from "./api";
+import { getEvents, extractLocations, checkToken, getAccessToken } from "./api";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Alert from "react-bootstrap/Alert";
+import WelcomeScreen from "./WelcomeScreen";
 
 import "./App.css";
 import "./nprogress.css";
@@ -15,6 +16,7 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
+    showWelcomeScreen: undefined,
     numberOfEvents: 32,
     location: "all",
   };
@@ -34,16 +36,28 @@ class App extends Component {
     });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({
-          events: events.slice(0, this.state.numberOfEvents),
-          locations: extractLocations(events),
+    // Only attempt to access Google API if online
+    if (navigator.onLine) {
+      const accessToken = localStorage.getItem("access_token");
+      const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+      const searchParams = new URLSearchParams(window.location.search);
+      const code = searchParams.get("code");
+      this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+      if ((code || isTokenValid) && this.mounted) {
+        getEvents().then((events) => {
+          if (this.mounted) {
+            this.setState({
+              events: events.slice(0, this.state.numberOfEvents),
+              locations: extractLocations(events),
+            });
+          }
         });
       }
-    });
+    } else {
+      getEvents();
+    }
   }
 
   componentWillUnmount() {
@@ -59,7 +73,16 @@ class App extends Component {
 
   render() {
     const logo = require("./meetUp_logo_transparent.png"); // with require
-
+    if (this.state.showWelcomeScreen === undefined) return <div className="App" />;
+    if (this.state.showWelcomeScreen === true)
+      return (
+        <WelcomeScreen
+          showWelcomeScreen={this.state.showWelcomeScreen}
+          getAccessToken={() => {
+            getAccessToken();
+          }}
+        />
+      );
     return (
       <div className="App">
         <Navbar sticky="top" bg="light" expand="lg" variant="light" className="mb-3">

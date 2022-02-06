@@ -7,7 +7,9 @@ import reportWebVitals from "./reportWebVitals";
 
 // Monitoring with Atatus
 import * as atatus from "atatus-spa";
-atatus.config("da8b93cae512412aa3880f42ff6029d9").install();
+if (navigator.onLine) {
+  atatus.config("da8b93cae512412aa3880f42ff6029d9").install();
+}
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +21,9 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register();
+if (navigator.onLine) {
+  serviceWorkerRegistration.register();
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
