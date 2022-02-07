@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
 import CitySearch from "./CitySearch";
+import EventGenre from "./EventGenre";
 import { getEvents, extractLocations, checkToken, getAccessToken } from "./api";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
@@ -153,24 +154,29 @@ class App extends Component {
             Attention: You run this App now in offline mode! Neu Events can not be loaded.
           </Alert>
         )}
-        {/* implementing a scatterChart */}
-        <h4>Events in each city</h4>
-        <ResponsiveContainer height={400}>
-          <ScatterChart
-            margin={{
-              top: 20,
-              right: 20,
-              bottom: 20,
-              left: 20,
-            }}
-          >
-            <CartesianGrid />
-            <XAxis type="category" dataKey="city" name="city" />
-            <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
-            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-            <Scatter data={this.getData()} fill="#470d21" />
-          </ScatterChart>
-        </ResponsiveContainer>
+        <div className="data-vis-wrapper">
+          {/* implementing a scatterplot */}
+          <h4>Events in each city</h4>
+          <ResponsiveContainer height={400}>
+            <ScatterChart
+              margin={{
+                top: 20,
+                right: 20,
+                bottom: 20,
+                left: 20,
+              }}
+            >
+              <CartesianGrid />
+              <XAxis type="category" dataKey="city" name="city" />
+              <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
+              <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+              <Scatter data={this.getData()} fill="#470d21" />
+            </ScatterChart>
+          </ResponsiveContainer>
+
+          {/* implementing a wildly popular pie chart to visualize the popularity of event genres */}
+          <EventGenre events={this.state.events} />
+        </div>
 
         <EventList events={this.state.events} />
       </div>
