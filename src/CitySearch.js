@@ -42,6 +42,7 @@ class CitySearch extends Component {
     });
     this.props.updateEvents(suggestion);
   };
+
   componentDidMount() {
     document.addEventListener("mousedown", (event) => {
       if (event.target.closest(".CitySearch")) return;
@@ -51,6 +52,7 @@ class CitySearch extends Component {
       });
     });
   }
+
   render() {
     const { query } = this.state;
 

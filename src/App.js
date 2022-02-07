@@ -81,7 +81,7 @@ class App extends Component {
   };
 
   render() {
-    const logo = require("./meetUp_logo_transparent.png"); // with require
+    const logo = require("./meetUp_logo_transparent.webp"); // with require
     if (this.state.showWelcomeScreen === true)
       return (
         <WelcomeScreen
