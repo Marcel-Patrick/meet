@@ -8,6 +8,15 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Alert from "react-bootstrap/Alert";
 import WelcomeScreen from "./WelcomeScreen";
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 import "./App.css";
 import "./nprogress.css";
@@ -39,7 +48,7 @@ class App extends Component {
   async componentDidMount() {
     this.mounted = true;
     // Only attempt to access Google API if online
-    if (navigator.onLine) {
+    if (navigator.onLine && !window.location.href.startsWith("http://localhost")) {
       const accessToken = localStorage.getItem("access_token");
       const isTokenValid = (await checkToken(accessToken)).error ? false : true;
       const searchParams = new URLSearchParams(window.location.search);
@@ -80,8 +89,27 @@ class App extends Component {
     this.updateEvents(this.state.location, eventNumbers);
   };
 
+  getData = () => {
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter((event) => event.location === location).length;
+      const city = location.split(", ").shift();
+      return { city, number };
+    });
+
+    return data;
+  };
+
   render() {
     const logo = require("./meetUp_logo_transparent.webp"); // with require
+    if (
+      this.state.showWelcomeScreen === undefined &&
+      navigator.onLine &&
+      !window.location.href.startsWith("http://localhost")
+    ) {
+      return <div className="App" />;
+    }
+
     if (this.state.showWelcomeScreen === true)
       return (
         <WelcomeScreen
@@ -91,6 +119,7 @@ class App extends Component {
           }}
         />
       );
+
     return (
       <div className="App">
         <Navbar sticky="top" bg="light" expand="lg" variant="light" className="mb-3">
@@ -124,6 +153,25 @@ class App extends Component {
             Attention: You run this App now in offline mode! Neu Events can not be loaded.
           </Alert>
         )}
+        {/* implementing a scatterChart */}
+        <h4>Events in each city</h4>
+        <ResponsiveContainer height={400}>
+          <ScatterChart
+            margin={{
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 20,
+            }}
+          >
+            <CartesianGrid />
+            <XAxis type="category" dataKey="city" name="city" />
+            <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
+            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+            <Scatter data={this.getData()} fill="#470d21" />
+          </ScatterChart>
+        </ResponsiveContainer>
+
         <EventList events={this.state.events} />
       </div>
     );
