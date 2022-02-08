@@ -165,13 +165,13 @@ class App extends Component {
             </Col>
             <Col className="centerElements">
               <h4>Events in each city</h4>
-              <ResponsiveContainer height={400}>
+              <ResponsiveContainer height={400} minWidth={400}>
                 <ScatterChart
                   margin={{
                     top: 20,
-                    right: 20,
+                    right: 60,
                     bottom: 20,
-                    left: 20,
+                    left: 0,
                   }}
                 >
                   <CartesianGrid />

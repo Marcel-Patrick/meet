@@ -25,6 +25,12 @@ const renderActiveShape = (props) => {
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
   const textAnchor = cos >= 0 ? "start" : "end";
+  let addStoEvent;
+  if (value > 1) {
+    addStoEvent = "events";
+  } else {
+    addStoEvent = "event";
+  }
 
   return (
     <g>
@@ -56,7 +62,7 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`${value} event(s)`}</text>
+      >{`${value} ${addStoEvent}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
         {`(${(percent * 100).toFixed(2)}%)`}
       </text>
@@ -96,7 +102,7 @@ export default function EventGenre({ events }) {
         activeShape={renderActiveShape}
         data={data}
         cx={200}
-        cy={200}
+        cy={180}
         innerRadius={60}
         outerRadius={80}
         fill="#8884d8"
