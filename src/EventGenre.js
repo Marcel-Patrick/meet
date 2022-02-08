@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { PieChart, Pie, Sector } from "recharts";
+import { PieChart, Pie, Sector, Cell } from "recharts";
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -86,8 +86,8 @@ export default function EventGenre({ events }) {
   useEffect(() => {
     setData(() => getData(events));
   }, [events]);
-  console.log("getData: ", data);
-  console.log("events: ", events);
+  // ["React", "JavaScript", "Node", "jQuery", "AngularJS"];
+  const colors = ["#655D8A", "#FDB827", "#D885A3", "#7897AB", "#6D9886"];
 
   return (
     <PieChart width={400} height={400}>
@@ -102,7 +102,11 @@ export default function EventGenre({ events }) {
         fill="#8884d8"
         dataKey="value"
         onMouseEnter={onPieEnter}
-      />
+      >
+        {data.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={colors[index]} />
+        ))}
+      </Pie>
     </PieChart>
   );
 }

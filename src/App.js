@@ -21,6 +21,7 @@ import {
 
 import "./App.css";
 import "./nprogress.css";
+import { Col, Row } from "react-bootstrap";
 
 class App extends Component {
   state = {
@@ -94,7 +95,7 @@ class App extends Component {
     const { locations, events } = this.state;
     const data = locations.map((location) => {
       const number = events.filter((event) => event.location === location).length;
-      const city = location.split(", ").shift();
+      const city = location.split(/[,-]+/).shift();
       return { city, number };
     });
 
@@ -154,29 +155,40 @@ class App extends Component {
             Attention: You run this App now in offline mode! Neu Events can not be loaded.
           </Alert>
         )}
-        <div className="data-vis-wrapper">
-          {/* implementing a scatterplot */}
-          <h4>Events in each city</h4>
-          <ResponsiveContainer height={400}>
-            <ScatterChart
-              margin={{
-                top: 20,
-                right: 20,
-                bottom: 20,
-                left: 20,
-              }}
-            >
-              <CartesianGrid />
-              <XAxis type="category" dataKey="city" name="city" />
-              <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
-              <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-              <Scatter data={this.getData()} fill="#470d21" />
-            </ScatterChart>
-          </ResponsiveContainer>
-
-          {/* implementing a wildly popular pie chart to visualize the popularity of event genres */}
-          <EventGenre events={this.state.events} />
-        </div>
+        {/* implementing a scatterChart */}
+        <Container md={12} lg={6}>
+          <Row>
+            <Col className="centerElements">
+              {/* implementing a wildly popular pie chart to visualize the popularity of event genres */}
+              <h4>Popularity of events</h4>
+              <EventGenre events={this.state.events} />
+            </Col>
+            <Col className="centerElements">
+              <h4>Events in each city</h4>
+              <ResponsiveContainer height={400}>
+                <ScatterChart
+                  margin={{
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20,
+                  }}
+                >
+                  <CartesianGrid />
+                  <XAxis type="category" dataKey="city" name="City" />
+                  <YAxis
+                    type="number"
+                    dataKey="number"
+                    name="Number of events"
+                    allowDecimals={false}
+                  />
+                  <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+                  <Scatter data={this.getData()} fill="#FFC898" />
+                </ScatterChart>
+              </ResponsiveContainer>
+            </Col>
+          </Row>
+        </Container>
 
         <EventList events={this.state.events} />
       </div>

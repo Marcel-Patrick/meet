@@ -133,6 +133,23 @@ ul {
   padding: 0;
   list-style: none;
 }
+
+.centerElements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 700;
+}
+
+.centerElements h4 {
+  color: #b3541e;
+}
+@media only screen and (max-width: 1200px) {
+  .event__summary {
+    font-size: 24px;
+  }
+}
 @media only screen and (min-width: 992px) {
   .container-fluid {
     margin-left: 100px !important;
@@ -148,13 +165,15 @@ ul {
       "footer .";
   }
 }
-@media only screen and (max-width: 1200px) {
-  .event__summary {
-    font-size: 24px;
-  }
-}
+
 @media only screen and (max-width: 767px) {
   .event__summary {
     font-size: 28px;
+  }
+  .scatterChartWrapper h4 {
+    font-size: 22px;
+  }
+  .recharts-wrapper svg {
+    height: 360px;
   }
 }
