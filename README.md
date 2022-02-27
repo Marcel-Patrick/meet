@@ -4,13 +4,11 @@
 
 ### Objective:
 
----
-
 **To build a serverless, progressive web application (PWA) with React using a test-driven development (TDD) technique. The application uses the Google Calendar API to fetch upcoming events.**
 
-### Context:
-
 ---
+
+### Context:
 
 Serverless and PWAs have grown in popularity over the last few years, and they’re both considered to be the future of web development. By combining these two concepts, this app will not only work as a normal web application, but it will also reap the benefits of both serverless architecture and PWAs:
 
@@ -24,11 +22,11 @@ For this app, we will be using a TDD approach, where we write tests before writi
 
 Last but not least, we will add some graphs to this app, which will make it more visually appealing and allow us to more easily draw conclusions from the data. A picture is worth a thousand words, right? With a number of visualization techniques under the belt, we will be able to display any type of data we want and produce a variety of output formats. This app will allow users to search for a city and get a list of events hosted in that city. For the data visualization component, we will add two charts — one that shows how many events will take place in that city on upcoming days, and another that visualizes the popularity of event genres in the form of a pie chart.
 
+---
+
 ### Features & Requirements:
 
 #### Key Features:
-
----
 
 1. Filter events by city.
 2. Show/hide event details.
@@ -37,9 +35,9 @@ Last but not least, we will add some graphs to this app, which will make it more
 5. Add an app shortcut to the home screen.
 6. View a chart showing the number of upcoming events by city.
 
-#### Features, User-Stories & Scenarios:
-
 ---
+
+#### Features, User-Stories & Scenarios:
 
 **FEATURE 1: FILTER EVENTS BY CITY**<br/>
 **_User-Story:_** _As a user, I would like to be able to filter events by city so that I can see the list of events that take place in that city._
@@ -122,9 +120,9 @@ SCENARIO 1:<br/>
 **When** the user wants to know the location where an upcoming event is taking place<br/>
 **Then** a chart will show up the location to the user, where the event will taking place
 
-### Technical Requirements:
-
 ---
+
+### Technical Requirements:
 
 - The app must be a React application.
 - The app must be built using the TDD technique.
@@ -149,9 +147,9 @@ SCENARIO 1:<br/>
 - The app must be covered by tests with a coverage rate >= 90%
 - The app must be monitored using an online monitoring tool.
 
-### Setup:
-
 ---
+
+### Setup:
 
 1. Create React App and Setting up a React project with CRA:
 
@@ -210,3 +208,11 @@ SCENARIO 1:<br/>
   The final step is to actually deploy your project to the “gh-pages” branch! This can be done via the terminal with the following command:<br/>
   npm run deploy<br/>
   _This will push all changes to a branch named “gh-pages” in the repository. Once this is done, the React app will be live at the URL, specified in the “package.json” file._
+
+---
+
+## App / Livepage:
+
+[Link to Livepage](https://marcel-patrick.github.io/meet/)
+
+![HomePage](./img/Screenshot_meetUp.png)
